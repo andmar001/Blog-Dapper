@@ -1,0 +1,16 @@
+﻿@model BlogDapper.Models.Categoria;
+
+@{
+    ViewData["Title"] = "Crear categoria";
+}
+
+<h1>Crear Categoría</h1>
+<hr />
+
+<div class="row p-4">
+    <div class="col-4 offset-4">
+        <form asp-action="Crear">
+            <div asp-validation-summary="ModelOnly"></div>
+        </form>
+    </div>
+</div>
