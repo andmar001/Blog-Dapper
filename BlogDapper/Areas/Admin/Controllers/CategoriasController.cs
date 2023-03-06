@@ -1,6 +1,7 @@
 ﻿using BlogDapper.Models;
 using BlogDapper.Repositorio;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace BlogDapper.Areas.Admin.Controllers
 {
@@ -72,11 +73,26 @@ namespace BlogDapper.Areas.Admin.Controllers
             return View(categoria);
         }
 
-        #region
+        #region - interactua con js
         [HttpGet]
         public IActionResult GetCategorias() 
         {
             return Json(new { data = _repoCategoria.GetCategorias() });
+        }
+        
+        [HttpDelete]
+        public IActionResult BorrarCategoria(int? id) 
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _repoCategoria.BorrarCategoria(id.GetValueOrDefault());
+
+                return Json(new { success = true, message ="Categoria borrada correctamente" });
+            }
         }
         #endregion
     }

@@ -37,12 +37,12 @@ function cargarDatatable(){
 
 function Delete(url){
     swal({
-        title: '¿Está seguro de borrar?',
-        text: "¡Este contenido no se puede recuperar!",
+        title: 'Esta seguro de borrar?',
+        text: "Este contenido no se puede recuperar!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#DD6B55',
-        confirmButtonText: '¡Sí, borrar!',
+        confirmButtonText: 'Si, borrar!',
         closeOnConfirm: true
     }, function () {
         $.ajax({
