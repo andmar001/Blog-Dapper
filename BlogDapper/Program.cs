@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 //inyeccion de dependencias de los repositorios
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<IArticuloRepositorio, ArticuloRepositorio>();
 
 var app = builder.Build();
 
