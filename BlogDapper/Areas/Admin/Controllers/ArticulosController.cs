@@ -105,7 +105,8 @@ namespace BlogDapper.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetArticulos() 
         {
-            return Json(new { data = _repoArticulo.GetArticulos() });
+            //return Json(new { data = _repoArticulo.GetArticulos() });
+            return Json(new { data = _repoArticulo.GetArticuloCategoria() });
         }
         
         [HttpDelete]

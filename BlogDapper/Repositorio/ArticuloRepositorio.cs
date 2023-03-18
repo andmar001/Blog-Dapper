@@ -54,5 +54,19 @@ namespace BlogDapper.Repositorio
             _bd.Execute(sql, new { IdArticulo = id });
         }
 
+        public List<Articulo> GetArticuloCategoria()
+        {
+            var sql = "SELECT a.*, c.Nombre " +
+                      "FROM Articulo a INNER JOIN Categoria c " +
+                      "ON a.CategoriaId = c.IdCategoria ORDER BY IdArticulo DESC";
+            
+            var articulo = _bd.Query<Articulo, Categoria, Articulo>(sql, (a,c) =>
+            {
+                a.Categoria = c;
+                return a;
+            }, splitOn:"CategoriaId");
+
+            return articulo.Distinct().ToList();
+        }
     }
 }

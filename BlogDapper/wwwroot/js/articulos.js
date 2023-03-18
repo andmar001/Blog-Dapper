@@ -17,7 +17,7 @@ function cargarDatatable(){
             {
                 "data": "imagen",
                 "render": function (imagen) {
-                    return `<img src=../${imagen} width="100"`
+                    return `<img src="../${imagen}" width="100">`
                 }, "width":"10%"   
             },
             { "data": "estado", "width": "5%" },

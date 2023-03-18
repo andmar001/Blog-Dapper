@@ -9,5 +9,7 @@ namespace BlogDapper.Repositorio
         Articulo CrearArticulo(Articulo articulo);
         Articulo ActualizarArticulo(Articulo articulo);
         void BorrarArticulo(int id);
+        //se agrega nuevo método para obtener la relación entre articulo y categoría
+        List<Articulo> GetArticuloCategoria();
     }
 }
