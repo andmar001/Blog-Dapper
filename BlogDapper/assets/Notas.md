@@ -22,5 +22,9 @@ Instalacion de cdn de herramientas
 -------> <Nullable>disable</Nullable>
 
 
+# TinyMCE 
+- diseño bonito del textarea
 
+# enctype="multipart/form-data"
+Debemos agregarlo al formulario si queremos subir un archivo
 
