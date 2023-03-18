@@ -1,5 +1,6 @@
 ﻿using BlogDapper.Models;
 using Dapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -49,5 +50,12 @@ namespace BlogDapper.Repositorio
             _bd.Execute(sql, new { IdCategoria = id });
         }
 
+        public IEnumerable<SelectListItem> GetListaCategorias()
+        {
+            var sql = "SELECT * FROM Categoria";
+            var lista = _bd.Query<Categoria>(sql).ToList();
+            SelectList listaCategorias = new SelectList(lista, "IdCategoria", "Nombre");
+            return listaCategorias;
+        }
     }
 }

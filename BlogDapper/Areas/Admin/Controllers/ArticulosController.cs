@@ -23,6 +23,7 @@ namespace BlogDapper.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
+            ViewBag.SelectList = _repoCategoria.GetListaCategorias();
             return View();
         }
         

@@ -13,3 +13,14 @@ Instalacion de cdn de herramientas
 - jquery
 - toastr - avisos
 - sweetAlert
+
+# Desactivar opcion para permitir valores nullables
+
+- click sobre proyecto
+- editar archivo del proyecto
+- cambiar nodo de enable a disabled
+-------> <Nullable>disable</Nullable>
+
+
+
+
