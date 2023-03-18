@@ -10,10 +10,13 @@ namespace BlogDapper.Areas.Admin.Controllers
     {
         private readonly ICategoriaRepositorio _repoCategoria;
         private readonly IArticuloRepositorio _repoArticulo;
-        public ArticulosController(ICategoriaRepositorio repoCategoria, IArticuloRepositorio repoArticulo)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public ArticulosController(ICategoriaRepositorio repoCategoria, IArticuloRepositorio repoArticulo, IWebHostEnvironment hostingEnvironment)
         {
             _repoCategoria = repoCategoria;
             _repoArticulo = repoArticulo;
+            _hostingEnvironment = hostingEnvironment;  //to load files
         }
         public IActionResult Index()
         {
@@ -29,15 +32,37 @@ namespace BlogDapper.Areas.Admin.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear([Bind("IdCategoria,Nombre,FechaCreacion")] Categoria categoria)
+        public IActionResult Crear([Bind("IdArticulo,Titulo,Descripcion,Imagen,Estado,CategoriaId,FechaCreacion")] Articulo articulo)
         {
             //validaciones del modelo
             if(ModelState.IsValid)
             {
-                _repoCategoria.CrearCategoria(categoria);
-                return RedirectToAction(nameof(Index));
+                //subida de archivos
+                string rutaPrincipal = _hostingEnvironment.WebRootPath; //www
+                var archivos = HttpContext.Request.Form.Files;
+
+                if(articulo.IdArticulo == 0)
+                {
+                    //creamos un nuevo articulo
+                    string nombreArchivo = Guid.NewGuid().ToString();
+                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\articulos");
+                    var extension = Path.GetExtension(archivos[0].FileName);
+
+                    using ( var filesStream = new FileStream(Path.Combine(subidas, nombreArchivo + extension), FileMode.Create))
+                    {
+                        archivos[0].CopyTo(filesStream);
+                    }
+                    //guardar ruta de la imagen
+                    articulo.Imagen = @"\imagenes\articulos\" + nombreArchivo + extension;
+                    _repoArticulo.CrearArticulo(articulo);
+
+                    return RedirectToAction(nameof(Index));
+
+                }
+                //esta linea valida el modelo si es "false" retorna a la vista pero del GET, o sea el formulario
+                return RedirectToAction(nameof(Crear));
             }
-            return View(categoria);
+            return View(articulo);
         }
         
         //Este método viene del categorias.js - solo recupera la data por get
