@@ -17,6 +17,6 @@ namespace BlogDapper.Models
         //[Required(ErrorMessage ="El nombre de Categoría es obligatorio")] 
         public int ArticuloId { get; set; }
         //Relacion con categoría - un articulo debe pertenecer a una sola categoría
-        public virtual Articulo articulo { get; set;}
+        public virtual Articulo Articulo { get; set;}
     }
 }
