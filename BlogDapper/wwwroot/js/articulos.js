@@ -33,7 +33,7 @@ function cargarDatatable(){
                             <i class="bi bi-pencil-square" style="margin-right:5px"></i>Editar
                             </a>
                             &nbsp;
-                            <a onclick=Delete("/admin/articulos/BorrarArticulos/${data}") class="btn btn-danger text-white" style="cursor:pointer; width:100px">
+                            <a onclick=Delete("/admin/articulos/BorrarArticulo/${data}") class="btn btn-danger text-white" style="cursor:pointer; width:100px">
                             <i class="bi bi-x-square" style="margin-right:5px"></i>Borrar
                             </a>
                         </div>

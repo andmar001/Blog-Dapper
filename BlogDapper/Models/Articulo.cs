@@ -21,5 +21,6 @@ namespace BlogDapper.Models
         public int CategoriaId { get; set; }
         //Relacion con categoría - un articulo debe pertenecer a una sola categoría
         public virtual Categoria Categoria { get; set;}
+        public List<Comentario> Comentarios { get; set;}
     }
 }
