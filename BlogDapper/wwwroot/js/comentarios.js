@@ -18,7 +18,7 @@ function cargarDatatable(){
             { "data": "articulo.titulo", "width": "20%" },
             { "data": "fechaCreacion", "width": "20%" },
             {
-                "data": "idCategoria",
+                "data": "idComentario",
                 "render": function (data) {
                     return `
                         <div class="text-center">
