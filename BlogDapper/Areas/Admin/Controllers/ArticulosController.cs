@@ -75,30 +75,69 @@ namespace BlogDapper.Areas.Admin.Controllers
                 return NotFound();
             }
             
-            var categoria = _repoCategoria.GetCategoria(id.GetValueOrDefault());
-            if (categoria == null)
+            var articulo = _repoArticulo.GetArticulo(id.GetValueOrDefault());
+            if (articulo == null)
             {
                 return NotFound();
             }
 
-            return View(categoria);
+            ViewBag.SelectList = _repoCategoria.GetListaCategorias();
+            return View(articulo);
         }
-        
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Editar(int id, [Bind("IdCategoria,Nombre,FechaCreacion")] Categoria categoria)
+        public IActionResult Editar(int id, [Bind("IdArticulo,Titulo,Descripcion,Imagen,Estado,CategoriaId,FechaCreacion")] Articulo articulo)
         {
-            if (id != categoria.IdCategoria)
-            {
-                return NotFound();
-            }
             //validaciones del modelo
             if (ModelState.IsValid)
             {
-                _repoCategoria.ActualizarCategoria(categoria);
+                //subida de archivos
+                string rutaPrincipal = _hostingEnvironment.WebRootPath; //www
+                var archivos = HttpContext.Request.Form.Files;
+
+                //obtener articulo de la base de datos
+                var articuloDesdeDB = _repoArticulo.GetArticulo(id);
+
+                if (archivos.Count() > 0)
+                {
+                    //Editamos o cambiamos la imagen del articulo
+                    string nombreArchivo = Guid.NewGuid().ToString();
+                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\articulos");
+                    var extension = Path.GetExtension(archivos[0].FileName);
+
+                    var nuevaExtension = Path.GetExtension(archivos[0].FileName);
+
+                    var rutaImagen = Path.Combine(rutaPrincipal, articuloDesdeDB.Imagen.TrimStart('\\'));
+
+                    //Eliminar en caso q exista
+                    if (System.IO.File.Exists(rutaImagen))
+                    {
+                        System.IO.File.Delete(rutaImagen);
+                    }
+
+                    //subimos el nuevo archivo
+                    using (var filesStream = new FileStream(Path.Combine(subidas, nombreArchivo + nuevaExtension), FileMode.Create))
+                    {
+                        archivos[0].CopyTo(filesStream);
+                    }
+                    //guardar ruta de la imagen
+                    articulo.Imagen = @"\imagenes\articulos\" + nombreArchivo + nuevaExtension;
+
+                    _repoArticulo.ActualizarArticulo(articulo);
+
+                    return RedirectToAction(nameof(Index));
+
+                }
+                else
+                {
+                    //aqui es cuando la imagen ya existe y no se reemplaza(cuando no se cambio la imagen en la edición)
+                    articulo.Imagen = articuloDesdeDB.Imagen;
+                }
+
+                _repoArticulo.ActualizarArticulo(articulo);
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoria);
+            return RedirectToAction(nameof(Editar));
         }
 
         #region - interactua con js

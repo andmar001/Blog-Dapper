@@ -1,0 +1,88 @@
+﻿@model BlogDapper.Models.Articulo;
+
+@{
+    ViewData["Title"] = "Editar Articulo";
+}
+
+<h1>Editar Articulo</h1>
+<hr />
+
+<form asp-action="Editar" enctype="multipart/form-data">
+
+    @*se envia el id del articulo como hidden *@
+    <input type="hidden" asp-for="IdArticulo" />
+
+<div class="row bg-light border p-4">
+    <div class="col-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" placeholder="Ingresa el nombre de la categoria" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <textarea asp-for="Descripcion" class="form-control" style="height:300px"></textarea>
+            </div>
+
+            <div class="form-group mt-3">
+                @Html.DropDownList("CategoriaId",(SelectList)ViewBag.SelectList, "- Selecciona una categoría - ", htmlAttributes: new { @class = "form-control"  })
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group row mt-3">
+                <div class="col-3">
+                    <label asp-for="Estado" class="control-label"></label>
+                </div>
+                <div class="col-5">
+                    <input type="checkbox" asp-for="Estado" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label class="control-label">Seleccionar imagen</label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="archivos " class="form-control" />
+                    <span asp-validation-for="Imagen" class="text-danger"></span>
+                </div>
+            </div>
+    </div>
+    
+    <div class="col-6">
+        @*renderizar la imagen q esta en base de datos*@
+        <img src="@Model.Imagen" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+    </div>
+
+    <div class="row">
+            <div class="form-group row mt-4">
+                <div class="col-6">
+                    <input type="submit" value="Editar Articulo" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-6">
+                    <a asp-action="Index" class="btn btn-warning form-control">Volver a la lista</a>
+                </div>
+            </div>
+    </div>
+</div>
+</form>
+
+@*tinymce*@
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.tiny.cloud/1/qukxrn62f4bz0iv6z7enaelkkzuzugir28y709xit9xm659s/tinymce/5/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'format'
+        });
+    </script>
+}
