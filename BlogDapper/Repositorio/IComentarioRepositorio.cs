@@ -10,5 +10,7 @@ namespace BlogDapper.Repositorio
         Comentario CrearComentario(Comentario comentario);
         Comentario ActualizarComentario(Comentario comentario);
         void BorrarComentario(int id);
+        //Se agrega para hacer la relacion entre las tablas
+        List<Comentario> GetComentarioArticulo();
     }
 }

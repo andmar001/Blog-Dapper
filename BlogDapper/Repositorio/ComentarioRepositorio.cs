@@ -53,5 +53,20 @@ namespace BlogDapper.Repositorio
             var sql = "DELETE FROM Comentario WHERE IdComentario = @IdComentario";
             _bd.Execute(sql, new { IdComentario = id });
         }
+
+        //Obtener comentario con articulo (relación de uno a muchos)
+        public List<Comentario> GetComentarioArticulo()
+        {
+            var sql = "SELECT c.*, a.Titulo FROM Comentario c INNER JOIN Articulo a " +
+                "ON c.ArticuloId = a.IdArticulo ORDER BY IdComentario DESC";
+
+            var comentario = _bd.Query<Comentario, Articulo, Comentario>(sql, (c, a) =>
+            {
+                c.Articulo = a;
+                return c;
+            }, splitOn: "ArticuloId");
+
+            return comentario.Distinct().ToList();
+        }
     }
 }
