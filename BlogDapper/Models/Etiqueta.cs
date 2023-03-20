@@ -9,7 +9,7 @@ namespace BlogDapper.Models
         public int IdEtiqueta { get; set; }
 
         [Required(ErrorMessage ="El nombre de la etiqueta es obligatorio")]
-        public string Nombre { get; set; }
+        public string NombreEtiqueta { get; set; }
         public DateTime FechaCreacion { get; set; }   
         
         //Esta indica la relación con articulo, con una tabla intermedia ArticuloEtiqueta
