@@ -57,17 +57,21 @@ namespace BlogDapper.Repositorio
             SelectList listaEtiquetas = new SelectList(lista, "IdEtiqueta", "NombreEtiqueta");
             return listaEtiquetas;
         }
-
+        //Etiquetas asignadas a un articulo
         public List<Articulo> GetArticuloEtiquetas()
         {
-            throw new NotImplementedException();
+            var sql = "SELECT p.IdArticulo, Titulo, t.IdEtiqueta, NombreEtiqueta " +
+                       "FROM Articulo p " +
+                       "INNER JOIN ArticuloEtiquetas pt on pt.IdArticulo = p.IdArticulo " +
+                       "INNER JOIN Etiqueta t on t.IdEtiqueta = pt.IdEtiqueta";
+
+            var articulos = _bd.Query<Articulo, Etiqueta, Articulo>(sql, (articulo, etiqueta) =>
+            {
+                articulo.Etiqueta.Add(etiqueta);
+                return articulo;
+            }, splitOn:"IdEtiqueta");
+
+            return articulos.ToList();
         }
-
-        //etiquetas asignadas a un articulo
-        //public List<Articulo> GetArticuloEtiquetas()
-        //{
-        //    var sql = "SELECT"
-
-        //}
     }
 }
