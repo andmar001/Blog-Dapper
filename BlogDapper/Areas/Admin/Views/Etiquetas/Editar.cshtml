@@ -1,0 +1,32 @@
+﻿@model BlogDapper.Models.Etiqueta;
+
+@{
+    ViewData["Title"] = "Editar etiqueta";
+}
+
+<h1>Editar Categoría</h1>
+<hr />
+
+<div class="row p-4">
+    <div class="col-4 offset-4">
+        <form asp-action="Editar">
+            @*Se envia el id de la categoria como un campo oculto*@
+            <input type="hidden" asp-for="IdEtiqueta" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreEtiqueta" class="control-label"></label>
+                <input asp-for="NombreEtiqueta" class="form-control" placeholder="Ingresa el nombre de la etiqueta" />
+                <span asp-validation-for="NombreEtiqueta" class="text-danger"></span>
+            </div>
+            <div class="form-group row mt-4">
+                <div class="col-6">
+                    <input type="submit" value="Editar Etiqueta" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-6">
+                    <a asp-action="Index" class="btn btn-warning form-control">Volver a la lista</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
