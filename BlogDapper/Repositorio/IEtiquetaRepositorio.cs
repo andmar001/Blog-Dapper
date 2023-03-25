@@ -12,11 +12,9 @@ namespace BlogDapper.Repositorio
         void BorrarEtiqueta(int id);
         //método especial para el dropdown con la lista de Etiquetas en articulo
         IEnumerable<SelectListItem> GetListaEtiquetas();
-
-        //método especial para la accion de asignar etiquetas
-        
         //método especial para obtener los articulos con las etiquetas asignadas
         List<Articulo> GetArticuloEtiquetas();
-        
+        //método especial para la accion de asignar etiquetas
+        ArticuloEtiquetas AsignarEtiquetas(ArticuloEtiquetas articuloEtiquetas);
     }
 }
