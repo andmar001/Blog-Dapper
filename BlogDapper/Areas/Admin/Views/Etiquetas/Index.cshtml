@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BlogDapper.Models.Etiqueta>
+
+@{
+    ViewData["Title"] = "Lista de Etiquetas";
+}
+
+<div class="row">
+    <div class="col-9">
+        <h1>Administrador de Etiquetas</h1>
+    </div>
+    <div class="col-3">
+        <a asp-action="Crear" class="btn btn-primary float-end"><i class="bi bi-plus-square" style="margin-right:5px"></i> Agregar Etiqueta</a>
+    </div>
+</div>
+
+<div class="card bg-light p-3">
+    <table class="table" id="tblEtiquetas">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre Etiqueta</th>
+                <th>Fecha de Creación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*carga de datos dinamicos por medio de js *@
+            @*            @foreach (var item in Model)
+            {
+            <tr>
+            <td>@Html.DisplayFor(modelItem => item.IdCategoria)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+            <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+            <td>Boton Editar <br/> Boton Borrar</td>
+            </tr>
+            }*@
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/etiquetas.js"></script>
+}
