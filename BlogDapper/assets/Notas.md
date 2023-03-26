@@ -28,3 +28,5 @@ Instalacion de cdn de herramientas
 # enctype="multipart/form-data"
 Debemos agregarlo al formulario si queremos subir un archivo
 
+# Para la encriptación instalar la librería
+- XAct.Core.PCL
