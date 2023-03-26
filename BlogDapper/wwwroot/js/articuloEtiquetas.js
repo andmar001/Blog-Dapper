@@ -14,7 +14,7 @@ function cargarDatatable(){
         "columns": [
             { "data":"idArticulo", "width":"5%" },
             { "data":"titulo", "width":"30%" },
-            { "data": "etiquetas[0].nombreEtiqueta", "width": "30%" }
+            { "data": "etiqueta.[0].nombreEtiqueta", "width": "30%" }
         ]
     });
 }
