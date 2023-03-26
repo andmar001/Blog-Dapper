@@ -161,6 +161,26 @@ namespace BlogDapper.Areas.Admin.Controllers
 
             return View(articulo);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AsignarEtiquetaArticulo(int idArticulo, int idEtiqueta)
+        {
+            if (idArticulo == 0 || idEtiqueta == 0)
+            {
+                ViewBag.SelectList = _repoEtiqueta.GetListaEtiquetas();
+                return View();
+            }
+            else
+            {
+                ArticuloEtiquetas artiEtiquetas = new ArticuloEtiquetas();
+                artiEtiquetas.IdArticulo = idArticulo;
+                artiEtiquetas.IdEtiqueta = idEtiqueta;
+
+                _repoEtiqueta.AsignarEtiquetas(artiEtiquetas);
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
 
         #region - interactua con js
         [HttpGet]
