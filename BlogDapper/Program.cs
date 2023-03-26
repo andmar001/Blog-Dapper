@@ -16,9 +16,8 @@ builder.Services.AddScoped<IEtiquetaRepositorio, EtiquetaRepositorio>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        //tiempo de expiración
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.Cookie.Name = "CookieAutenticacion";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20); //tiempo de expiración
+        options.Cookie.Name = "CookieAutenticacion";  // nombre de la cookie - aparece en aplicacion -> cookie
         options.LoginPath = "/Front/Accesos/Acceso";
         options.SlidingExpiration = true;
         options.AccessDeniedPath = "/Front/Accesos/ErrorAcceso";

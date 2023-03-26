@@ -1,0 +1,47 @@
+﻿@model BlogDapper.Models.Usuario
+
+@{
+    ViewData["Title"] = "Registro Usuario";
+}
+
+<div class="container">
+    <div class="row bg-light border p-5">
+        <div class="col-6">
+            <form asp-action="UserRegistro" method="post">
+
+                <h2 class="text-center text-secondary mt-4">Registro de Nuevo Usuario</h2>
+
+                @if (TempData["mensajeConfirmacion"] != null)
+                {
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong> @TempData["mensajeConfirmacion"] </strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Login" class="control-label"></label>
+                    <input asp-for="Login" class="form-control" placeholder="Ingresa el usuario" />
+                    <span asp-validation-for="Login" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Ingresa el password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn btn-default btn-primary w-100">
+                        <i class="bi bi-person-circle">Registrarse</i>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-6">
+            <img src="~/imagenes/registro.jpg" class="img-fluid img-thumbnail" alt="Ingreso de usuarios" />
+        </div>
+    </div>
+</div>
