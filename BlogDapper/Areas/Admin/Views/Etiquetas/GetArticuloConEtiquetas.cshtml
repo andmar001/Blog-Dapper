@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Lista de articulos y etiquetas";
+}
+
+<div class="row">
+    <div class="col-9">
+        <h1>Lista de articulos y etiquetas</h1>
+    </div>
+</div>
+
+<div class="card bg-light p-3">
+    <table class="table" id="tblArticuloEtiqueta">
+        <thead>
+            <tr>
+                <th>Id Articulo</th>
+                <th>Titulo Articulo</th>
+                <th>Etiquetas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*carga de datos dinamicos por medio de js *@
+            @*            @foreach (var item in Model)
+            {
+            <tr>
+            <td>@Html.DisplayFor(modelItem => item.IdCategoria)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+            <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+            <td>Boton Editar <br/> Boton Borrar</td>
+            </tr>
+            }*@
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/articuloEtiquetas.js"></script>
+}

@@ -73,6 +73,12 @@ namespace BlogDapper.Areas.Admin.Controllers
             return View(etiqueta);
         }
 
+        [HttpGet]
+        public IActionResult GetArticuloConEtiquetas()
+        {
+            return View();
+        }
+
         #region - interactua con js
         [HttpGet]
         public IActionResult GetEtiquetas() 

@@ -5,6 +5,11 @@ namespace BlogDapper.Models
 {
     public class Articulo
     {
+        //soporte para lista de etiquetas
+        public Articulo() 
+        {
+            Etiqueta = new List<Etiqueta>();
+        }
         [Key]
         public int IdArticulo { get; set; }
         [Required(ErrorMessage = "El Título es obligatorio")] //vendra de un dropdown
