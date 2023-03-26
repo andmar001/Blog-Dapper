@@ -1,0 +1,44 @@
+﻿@model BlogDapper.Models.Articulo
+
+@{
+    ViewData["Title"] = "Asignar Etiquetas a Artículo";
+}
+
+<h1>Asignar Etiquetas a Artículo</h1>
+
+<hr />
+<form asp-action="AsignarEtiquetaArticulo">
+    <div class="row bg-light border p-4">
+        <div class="col-6">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdArticulo" class="control-label"></label>
+                <input asp-for="IdArticulo" class="form-control" readonly />
+                <span asp-validation-for="IdArticulo" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="col-6">
+            <h3>Selecciona Etiquetas para el Artículo</h3>
+            <div class="form-group mt-3">
+                @Html.DropDownList("IdEtiqueta", (SelectList)ViewBag.SelectList,
+                "-Selecciona una etiqueta-", htmlAttributes: new { @class = "form-control"})
+            </div>
+            <div class="form-group row mt-4">
+                <div class="col-6">
+                    <input type="submit" value="Asignar Etiqueta" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-6">
+                    <a asp-action="Index" class="btn btn-warning form-control">Volver a lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -22,23 +22,28 @@ function cargarDatatable(){
             },
             { "data": "estado", "width": "5%" },
             { "data": "categoria.nombre", "width": "10%" },
-            { "data": "categoria.fechaCreacion", "width": "15%" },
+            { "data": "categoria.fechaCreacion", "width": "10%" },
 
             {
                 "data": "idArticulo",
                 "render": function (data) {
-                    return `
-                        <div class="text-center">
-                            <a href="/admin/articulos/editar/${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px">
-                            <i class="bi bi-pencil-square" style="margin-right:5px"></i>Editar
-                            </a>
-                            &nbsp;
-                            <a onclick=Delete("/admin/articulos/BorrarArticulo/${data}") class="btn btn-danger text-white" style="cursor:pointer; width:100px">
-                            <i class="bi bi-x-square" style="margin-right:5px"></i>Borrar
-                            </a>
-                        </div>
-                    `;
-                }
+                    return ` <div class="text-center">
+
+                                <a href="/admin/articulos/editar/${data}" class="btn btn-success text-white" style="cursor:pointer; width:100px">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </a>                                
+                                &nbsp;
+                                <a onclick=Delete("/admin/articulos/BorrarArticulo/${data}") class="btn btn-danger text-white" style="cursor:pointer; width:100px;">
+                                    <i class="bi bi-x-square"></i> Borrar
+                                </a>
+                                &nbsp;
+                                <a href="/admin/articulos/AsignarEtiquetas/${data}" class="btn btn-secondary text-white" style="cursor:pointer; width:100px">
+                                    <i class="bi bi-tags-fill"></i> Asignar Etiquetas
+                                </a>                                
+
+                               </div>
+                           `;
+                }, "width": "50%"
             }
         ]
     });

@@ -10,12 +10,14 @@ namespace BlogDapper.Areas.Admin.Controllers
     {
         private readonly ICategoriaRepositorio _repoCategoria;
         private readonly IArticuloRepositorio _repoArticulo;
+        private readonly IEtiquetaRepositorio _repoEtiqueta;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public ArticulosController(ICategoriaRepositorio repoCategoria, IArticuloRepositorio repoArticulo, IWebHostEnvironment hostingEnvironment)
+        public ArticulosController(ICategoriaRepositorio repoCategoria, IArticuloRepositorio repoArticulo, IEtiquetaRepositorio repoEtiqueta, IWebHostEnvironment hostingEnvironment)
         {
             _repoCategoria = repoCategoria;
             _repoArticulo = repoArticulo;
+            _repoEtiqueta = repoEtiqueta;
             _hostingEnvironment = hostingEnvironment;  //to load files
         }
         public IActionResult Index()
@@ -138,6 +140,26 @@ namespace BlogDapper.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Editar));
+        }
+
+        //Para la parte de asignar etiquetas a un articulo 
+        [HttpGet]
+        public IActionResult AsignarEtiquetas(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var articulo = _repoArticulo.GetArticulo(id.GetValueOrDefault());
+
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+            //si, si existe - dropdown
+            ViewBag.SelectList = _repoEtiqueta.GetListaEtiquetas();
+
+            return View(articulo);
         }
 
         #region - interactua con js

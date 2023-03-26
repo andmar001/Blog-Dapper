@@ -73,7 +73,6 @@ namespace BlogDapper.Repositorio
 
             return articulos.ToList();
         }
-
         public ArticuloEtiquetas AsignarEtiquetas(ArticuloEtiquetas articuloEtiquetas)
         {
             var sql = "INSERT INTO ArticuloEtiquetas(IdArticulo,IdEtiqueta) VALUES(@IdArticulo,@IdEtiqueta)";
