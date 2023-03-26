@@ -142,6 +142,15 @@ namespace BlogDapper.Areas.Front.Controllers
 
         }
 
+        //para salir
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Salir()
+        {
+            //para cerrar la sesión -  destruye la cookie con el "token" de vida
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Inicio");
+        }
 
 
         //Método para encriptar contraseña con MD5 se usa tanto en el acceso como en el registro
