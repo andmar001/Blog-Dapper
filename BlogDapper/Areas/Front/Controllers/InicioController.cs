@@ -53,6 +53,21 @@ namespace BlogDapper.Areas.Front.Controllers
 
             return View(articulo); 
         }
+        
+        [HttpPost]
+        public IActionResult CrearComentario(string Titulo, string Mensaje, int ArticuloId)
+        {
+            var sql = @"INSERT INTO Comentario (Titulo,Mensaje,ArticuloId) VALUES(@Titulo,@Mensaje,@ArticuloId)";
+
+            _bd.Execute(sql, new
+            {
+                Titulo,
+                Mensaje,
+                ArticuloId
+            });
+
+            return View(articulo); 
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

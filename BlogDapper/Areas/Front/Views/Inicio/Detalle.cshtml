@@ -27,3 +27,37 @@
 
     </div>
 </div>
+
+<div class="row mt-4">
+    @*validar que el usuario este autenticado *@
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h3 class="text-center">Crear Comentario</h3>
+        <div class="col-4 offset-4">
+            <form asp-controller="Inicio" asp-action="CrearComentario">
+
+                <div class="form-group">
+                    <label for="Titulo" class="control-label">Titulo:</label>
+                    <input name="Titulo" class="form-control" placeholder="Ingresa el titulo del comentario" />
+                </div>
+                <div class="form-group">
+                    <label for="Mensaje" class="control-label">Mensaje:</label>
+                    <input name="Mensaje" class="form-control" placeholder="Ingresa el mensaje del comentario" />
+                </div>
+                <div class="form-group">
+                    <label for="Articulo" class="control-label">Articulo:</label>
+                    <input name="ArticuloId" value="@Model.IdArticulo" class="form-control" readonly/>
+                </div>
+
+                <div class="form-group row mt-4">
+                    <div class="col-6">
+                        <input type="submit" value="Crear Comentario" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn btn-warning form-control">Volver a la lista</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+</div>
