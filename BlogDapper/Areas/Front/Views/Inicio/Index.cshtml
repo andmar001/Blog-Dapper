@@ -1,8 +1,52 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<BlogDapper.Models.Articulo>
+@{
+    ViewData["Title"] = "Página de Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row my-4">
+    <div class="col-8">
+        <h1 class="text-center text-white bg-secondary py-1">Últimos Articulos</h1>
+        @if (Model.Count() > 0)
+        {
+            <hr/>
+            <div class="row">
+                @foreach (var articulo in Model)
+                {
+                    <div class="col-6">
+                        <div class="card">
+                            <img src="@articulo.Imagen" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">@articulo.Titulo</h5>
+                                <a asp-action="Detalle" class="btn btn-secondary" style="border-radius:2px" asp-route-id="@articulo.IdArticulo">
+                                    <i class="bi bg-info-circle-fill"></i> Más Información
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No hay articulos</p>
+        }
+    </div>
+
+    @*Lista de categorias *@
+    <div class="col-4">
+        <h3>Categorías</h3>
+        @if (ViewData["ListaCategorias"] != null)
+        {
+            <ul class="list-group">
+                @foreach (var item in (List<Categoria>) ViewData["ListaCategorias"])
+            {                
+                    <li class="list-group-item bg-secondary text-white">@item.Nombre</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No hay categorías</p>
+        }
+    </div>  
 </div>

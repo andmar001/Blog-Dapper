@@ -22,14 +22,23 @@ namespace BlogDapper.Areas.Front.Controllers
 
         public IActionResult Index()
         {
-            var sqlSlider = "SELECT * FROM Slider ORDER BY IdSlider DESC";
+            var sqlSlider = @"SELECT * FROM Slider ORDER BY IdSlider DESC";
+            ViewData["ListaSlider"] = _bd.Query<Slider>(sqlSlider).ToList();
 
-            ViewData["ListaCategorias"] = _bd.Query<Slider>(sqlSlider).ToList();
+            var sqlArticulos = @"SELECT * FROM Articulo WHERE Estado=@Estado ORDER BY IdArticulo DESC";
+            var articulos = _bd.Query<Articulo>(sqlArticulos, new
+            {
+                //solo articulos validos 
+                @Estado = 1
+            }).ToList();
+
+            var sqlCategorias = @"SELECT * FROM Categoria ORDER BY IdCategoria DESC";
+            ViewData["ListaCategorias"] = _bd.Query<Categoria>(sqlCategorias).ToList();
 
             //con esta validación sabemos si estamos en el home o no
             ViewBag.IsHome = true;
 
-            return View();
+            return View(articulos);
 
         }
 
