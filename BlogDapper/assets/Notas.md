@@ -30,3 +30,5 @@ Debemos agregarlo al formulario si queremos subir un archivo
 
 # Para la encriptación instalar la librería
 - XAct.Core.PCL
+
+# Agregar crud de la tabla slider
