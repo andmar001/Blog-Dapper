@@ -1,0 +1,29 @@
+﻿@model BlogDapper.Models.Articulo
+
+@{
+    ViewData["Title"] = "Detalle Articulo";
+}
+
+<div class="row mt-4">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-12">
+                <h4 class="text-center">@Model.Titulo</h4>
+            </div>    
+        </div>
+         <div class="card-body">
+            <div class="col-12">
+                <img src="@Model.Imagen" class="img-thumbnail mx-auto d-block"/>
+                <p class="text-secondary">@Html.Raw(Model.Descripcion)</p>
+            </div>    
+        </div>
+         <div class="card-footer">
+            <div class="row">
+                <div class="col-12 col-md-6 pb-1">
+                    <a asp-action="Index" class="btn btn-secondary btn-sm">Volver</a>
+                </div>
+            </div>    
+        </div>
+
+    </div>
+</div>

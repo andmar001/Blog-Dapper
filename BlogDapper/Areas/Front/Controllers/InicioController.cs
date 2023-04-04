@@ -42,9 +42,16 @@ namespace BlogDapper.Areas.Front.Controllers
 
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult Detalle(int id)
         {
-            return View();
+            var sql = @"SELECT * FROM Articulo WHERE IdArticulo=@IdArticulo";
+            var articulo = _bd.Query<Articulo>(sql, new
+            {
+                IdArticulo = id
+            }).Single();
+
+            return View(articulo); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
