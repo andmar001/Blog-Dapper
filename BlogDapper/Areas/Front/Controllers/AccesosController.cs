@@ -2,6 +2,7 @@
 using Dapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol.Plugins;
 using System.Data;
@@ -11,6 +12,7 @@ using XSystem.Security.Cryptography;
 
 namespace BlogDapper.Areas.Front.Controllers
 {
+    [Authorize]
     [Area("Front")]
     public class AccesosController : Controller
     {
@@ -19,12 +21,14 @@ namespace BlogDapper.Areas.Front.Controllers
         {
             _bd = new SqlConnection(configuration.GetConnectionString("ConexionSQLLocalDB"));
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Acceso()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult UserLogin(Usuario user)
@@ -75,12 +79,13 @@ namespace BlogDapper.Areas.Front.Controllers
             }
 
         }
-
+        [AllowAnonymous]
         public IActionResult Registro()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult UserRegistro(Usuario user)

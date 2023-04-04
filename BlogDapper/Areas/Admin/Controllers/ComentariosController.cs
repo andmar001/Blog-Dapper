@@ -1,10 +1,12 @@
 ﻿using BlogDapper.Models;
 using BlogDapper.Repositorio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace BlogDapper.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")] //pertenece al area de admin
     public class ComentariosController : Controller
     {
