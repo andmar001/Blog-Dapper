@@ -51,22 +51,30 @@ namespace BlogDapper.Areas.Front.Controllers
                 IdArticulo = id
             }).Single();
 
+            //Enviar la lista de comentarios para este articulo 
+            var sqlComentarios = "SELECT * FROM Comentario WHERE ArticuloId=@ArticuloId ORDER BY IdComentario DESC";
+            ViewData["ListaComentarios"] = _bd.Query<Comentario>(sqlComentarios, new
+            {
+                ArticuloId = id
+            }).ToList();
+
             return View(articulo); 
         }
         
         [HttpPost]
         public IActionResult CrearComentario(string Titulo, string Mensaje, int ArticuloId)
         {
-            var sql = @"INSERT INTO Comentario (Titulo,Mensaje,ArticuloId) VALUES(@Titulo,@Mensaje,@ArticuloId)";
+            var sql = @"INSERT INTO Comentario (Titulo,Mensaje,ArticuloId,FechaCreacion) VALUES(@Titulo,@Mensaje,@ArticuloId,@FechaCreacion)";
 
             _bd.Execute(sql, new
             {
                 Titulo,
                 Mensaje,
-                ArticuloId
+                ArticuloId,
+                FechaCreacion = DateTime.Now
             });
 
-            return View(articulo); 
+            return RedirectToAction("Index", "Inicio"); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -61,3 +61,29 @@
         </div>
     }
 </div>
+
+<div class="row mt-4">
+    <div class="col-4">
+        <h3>Comentarios:</h3>
+
+        @if(ViewData["ListaComentarios"] != null)
+        {
+            <ul class="list-group">
+            @foreach (var item in (List<Comentario>)ViewData["ListaComentarios"])
+            {
+                <li class="list-group-item bg-success text-white">
+                    <strong>@item.Titulo</strong>
+                    <br />
+                    @item.Mensaje
+                </li>
+            }
+            </ul>
+        }
+        else
+        {
+            <p>No hay comentarios</p>
+        }
+
+        
+    </div>
+</div>
