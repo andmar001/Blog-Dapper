@@ -1,0 +1,61 @@
+﻿@model BlogDapper.Models.Slider
+
+@{
+    ViewData["Title"] = "Editar Slider";
+}
+
+<h1>Editar Slider</h1>
+
+<hr />
+
+
+<form asp-action="Editar" enctype="multipart/form-data">
+    <!--Se envía el ID del slider-->
+    <input type="hidden" asp-for="IdSlider" />
+
+    <div class="row bg-light border p-4">
+        <div class="col-6">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" placeholder="Ingresa el nombre del slider" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-4">
+                    <label class="control-label">Seleccionar Imagen:</label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="archivos" class="form-control" />
+                    <span asp-validation-for="UrlImagen" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <img src="@Model.UrlImagen" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>
+
+        <div class="row">
+            <div class="form-group row mt-4">
+                <div class="col-6">
+                    <input type="submit" value="Editar Slider" class="btn btn-primary form-control" />
+                </div>
+                <div class="col-6">
+                    <a asp-action="Index" class="btn btn-warning form-control">Volver a lista</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}   
